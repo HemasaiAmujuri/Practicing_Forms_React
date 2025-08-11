@@ -1,11 +1,10 @@
-import React from 'react';
+
+import Loginpage from './pages/Login'
 
 
 function App(){
     return(
-      <div>
-        <h1> Lets start Forms Practice </h1>
-      </div>
+      <Loginpage />
     );
 }
 
