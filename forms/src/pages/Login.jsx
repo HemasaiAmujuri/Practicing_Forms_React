@@ -1,6 +1,7 @@
 import "../styles/Loginstyle.css";
 import React from "react";
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 function Loginpage() {
   const [email, setEmail] = useState("");
@@ -48,7 +49,7 @@ function Loginpage() {
         <div className="button">
           <input type="submit" onClick={storeData} />
         </div>
-          <h6> Don't have an account? <a href = "./Signup.jsx">signUp</a></h6>
+          <h6> Don't have an account? <Link to="/Signup">Signup </Link></h6>
       </form>
     </div>
   );

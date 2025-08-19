@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from 'react-router-dom'
+import '../styles/Signupstyle.css'
 
 function Signup() {
   const [form, setForm] = useState({
@@ -81,21 +83,27 @@ function Signup() {
           />
         </div>
 
-        <div className="info">
-          <label> Gender </label>
-          <select required>
-            <option value="male"> Male </option>
-            <option value="female"> Female </option>
-            <option value="other"> Other </option>
-          </select>
-        </div>
+        <div className="gender">
+
+          <legend> Gender </legend>
+          <input type="radio" name="gender" value="male"/>
+          <label>Male</label>
+
+          
+          <input type="radio" name="gender" value="female"/>
+          <label>Female</label>
+
+         
+          <input type="radio" name="gender" value="other"/>
+           <label>Other</label>
+           </div>
 
         <div className="info">
           <label> Address </label>
           <input
             type="textArea"
             Placeholder="Enter your address"
-            rows="5"
+            rows="50"
             cols="30"
             onChange={handleEvent}
           ></input>
@@ -108,7 +116,7 @@ function Signup() {
           ></input>
         </div>
 
-        <h6> Already have an account? LogIn</h6>
+        <h6> Already have an account? <Link to = "/login">LogIn</Link></h6>
       </form>
     </div>
   );

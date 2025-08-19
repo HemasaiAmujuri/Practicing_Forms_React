@@ -10,33 +10,25 @@ html,body {
 
 .signUp {
   display : flex;
-  align-items : center;
   justify-content : center;
-  height : 100vh;
+  margin-top : 15px;
 }
 
 
 form {
-  height : 50%;
+  height : 90%;
   width : 20%;
   background-color: white;
   display : flex;
   flex-direction: column;
-  align-items : center;
   gap : 20px;
-}
-
-
-
-.info {
-  display : flex;
-  flex-direction : column;
 }
 
 
 input {
   border-radius : 20px;
   height : 35px;
+  width : 200px;;
   padding-left:15px;
   border-style: none;
   background-color: lightgray;
@@ -63,10 +55,28 @@ input[type="submit"] {
 }
 
 
+input[type="Date"] {
+    padding-right : 3px;
+}
+
+input[type="radio"] {
+  width: 15px;
+  height: 15px;
+}
+
+
+.gender {
+  
+}
+
+
 h6 {
   margin-top : 0px;
   
 }
+
+
+
 
 
 
