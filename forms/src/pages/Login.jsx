@@ -13,6 +13,10 @@ function Loginpage() {
     passwordRef.current.value = "";
   };
 
+  function storeData() { 
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
+    alert("Login successfully")
   function storeData() {
     localStorage.setItem("email", emailRef.current.value);
     localStorage.setItem("password", passwordRef.current.value);
