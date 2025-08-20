@@ -14,7 +14,7 @@ function Loginpage() {
     setPassword('');
   };
 
-  function storeData() {
+  function storeData() { 
     localStorage.setItem("email", email);
     localStorage.setItem("password", password);
     alert("Login successfully")
