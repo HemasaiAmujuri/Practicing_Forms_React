@@ -35,7 +35,6 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     storeData();
-    console.log(form);
     setForm({
     name: "",
     email: "",
@@ -44,6 +43,7 @@ function Signup() {
     gender: "",
     address: "",
   });
+  alert("Data saved successfully")
   };
 
   return (
