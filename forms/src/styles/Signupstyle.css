@@ -60,19 +60,26 @@ input[type="Date"] {
 }
 
 input[type="radio"] {
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
 }
 
 
-.gender {
-  
+legend {
+  font-weight: bolder;
+  margin-bottom : 5px;
 }
 
 
 h6 {
   margin-top : 0px;
   
+}
+
+
+textarea {
+  background-color: lightgray;
+  border-style: none;
 }
 
 

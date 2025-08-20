@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from 'react-router-dom'
-import '../styles/Signupstyle.css'
+import { Link } from "react-router-dom";
+import "../styles/Signupstyle.css";
 
 function Signup() {
   const [form, setForm] = useState({
@@ -14,8 +14,6 @@ function Signup() {
   });
 
   const handleEvent = (e) => {
-    e.preventDefault();
-
     const name = e.target.name;
     const value = e.target.value;
 
@@ -25,25 +23,39 @@ function Signup() {
     }));
   };
 
-
-  function storeData(){
-    localStorage.setItem('name', form.name);
-    localStorage.setItem('email', form.email);
-    localStorage.setItem('DOB', form.DOB);
-    localStorage.setItem('mobile', form.mobile);
-    localStorage.setItem('gender', form.gender);
-    localStorage.setItem('address', form.address)
+  function storeData() {
+    localStorage.setItem("name", form.name);
+    localStorage.setItem("email", form.email);
+    localStorage.setItem("DOB", form.DOB);
+    localStorage.setItem("mobile", form.mobile);
+    localStorage.setItem("gender", form.gender);
+    localStorage.setItem("address", form.address);
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    storeData();
+    console.log(form);
+    setForm({
+    name: "",
+    email: "",
+    DOB: "",
+    mobile: "",
+    gender: "",
+    address: "",
+  });
+  };
+
   return (
-    <div class="signUp">
-      <form onSubmit={handleEvent}>
+    <div className="signUp">
+      <form onSubmit={handleSubmit}>
         <div className="info">
-            <h1> SIGN UP </h1>
+          <h1> SIGN UP </h1>
           <label> Name </label>
           <input
             type="text"
             value={form.name}
+            name="name"
             placeholder="Enter your name"
             required
             onChange={handleEvent}
@@ -55,6 +67,7 @@ function Signup() {
           <input
             type="email"
             value={form.email}
+            name="email"
             placeholder="Enter your email"
             required
             onChange={handleEvent}
@@ -66,6 +79,7 @@ function Signup() {
           <input
             type="Date"
             value={form.DOB}
+            name="DOB"
             placeholder="Enter your name"
             required
             onChange={handleEvent}
@@ -75,8 +89,9 @@ function Signup() {
         <div className="info">
           <label> Mobile </label>
           <input
-            type="text"
+            type="number"
             value={form.mobile}
+            name="mobile"
             placeholder="Enter your name"
             required
             onChange={handleEvent}
@@ -84,39 +99,36 @@ function Signup() {
         </div>
 
         <div className="gender">
-
           <legend> Gender </legend>
-          <input type="radio" name="gender" value="male"/>
+          <input type="radio" name="gender" value="male"  checked={form.gender == "male"} onChange={handleEvent}/>
           <label>Male</label>
 
-          
-          <input type="radio" name="gender" value="female"/>
+          <input type="radio" name="gender" value="female" checked={form.gender == "female"} onChange={handleEvent}/>
           <label>Female</label>
 
-         
-          <input type="radio" name="gender" value="other"/>
-           <label>Other</label>
-           </div>
+          <input type="radio" name="gender" value="other" checked={form.gender == "other"} onChange={handleEvent}/>
+          <label>Other</label>
+        </div>
 
         <div className="info">
           <label> Address </label>
-          <input
-            type="textArea"
-            Placeholder="Enter your address"
-            rows="50"
-            cols="30"
+          <textarea
+            placeholder="Enter your address"
+            rows="5"
+            cols="25"
+            value={form.address}
+            name="address"
             onChange={handleEvent}
-          ></input>
+          ></textarea>
         </div>
-
 
         <div className="button">
-          <input
-            type="submit"onClick={storeData}
-          ></input>
+          <input type="submit"></input>
         </div>
 
-        <h6> Already have an account? <Link to = "/login">LogIn</Link></h6>
+        <h6>
+          Already have an account? <Link to="/login">LogIn</Link>
+        </h6>
       </form>
     </div>
   );
