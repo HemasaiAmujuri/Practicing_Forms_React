@@ -1,49 +1,39 @@
-import React from "react";
-import { useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Signupstyle.css";
 
 function Signup() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    DOB: "",
-    mobile: "",
-    gender: "",
-    address: "",
-  });
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const dobRef = useRef();
+  const mobileRef = useRef();
+  const genderRef = useRef();
+  const addressRef = useRef();
+
 
   const handleEvent = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    e.preventDefault()
+    nameRef.current.value = "";
+    emailRef.current.value = "";
+    dobRef.current.value = "";
+    mobileRef.current.value="";
+    genderRef.current.value = "";
+    addressRef.current.value = "";
 
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
   };
 
   function storeData() {
-    localStorage.setItem("name", form.name);
-    localStorage.setItem("email", form.email);
-    localStorage.setItem("DOB", form.DOB);
-    localStorage.setItem("mobile", form.mobile);
-    localStorage.setItem("gender", form.gender);
-    localStorage.setItem("address", form.address);
+    localStorage.setItem("name", nameRef.current.value);
+    localStorage.setItem("email", emailRef.current.value);
+    localStorage.setItem("DOB", dobRef.current.value);
+    localStorage.setItem("mobile", mobileRef.current.value);
+    localStorage.setItem("gender", genderRef.current.value);
+    localStorage.setItem("address", addressRef.current.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     storeData();
-    console.log(form);
-    setForm({
-    name: "",
-    email: "",
-    DOB: "",
-    mobile: "",
-    gender: "",
-    address: "",
-  });
   };
 
   return (
@@ -54,11 +44,11 @@ function Signup() {
           <label> Name </label>
           <input
             type="text"
-            value={form.name}
+            ref={nameRef}
             name="name"
             placeholder="Enter your name"
             required
-            onChange={handleEvent}
+
           />
         </div>
 
@@ -66,11 +56,10 @@ function Signup() {
           <label> Email </label>
           <input
             type="email"
-            value={form.email}
+            ref={emailRef}
             name="email"
             placeholder="Enter your email"
             required
-            onChange={handleEvent}
           />
         </div>
 
@@ -78,11 +67,10 @@ function Signup() {
           <label> DOB </label>
           <input
             type="Date"
-            value={form.DOB}
+            ref={dobRef}
             name="DOB"
             placeholder="Enter your name"
             required
-            onChange={handleEvent}
           />
         </div>
 
@@ -90,23 +78,22 @@ function Signup() {
           <label> Mobile </label>
           <input
             type="number"
-            value={form.mobile}
+            ref={mobileRef}
             name="mobile"
             placeholder="Enter your name"
             required
-            onChange={handleEvent}
           />
         </div>
 
         <div className="gender">
           <legend> Gender </legend>
-          <input type="radio" name="gender" value="male"  checked={form.gender == "male"} onChange={handleEvent}/>
+          <input type="radio" name="gender" value="male"  checked={genderRef.current.value == "male"} />
           <label>Male</label>
 
-          <input type="radio" name="gender" value="female" checked={form.gender == "female"} onChange={handleEvent}/>
+          <input type="radio" name="gender" value="female" checked={genderRef.current.value == "female"} />
           <label>Female</label>
 
-          <input type="radio" name="gender" value="other" checked={form.gender == "other"} onChange={handleEvent}/>
+          <input type="radio" name="gender" value="other" checked={genderRef.current.value == "other"} />
           <label>Other</label>
         </div>
 
@@ -116,9 +103,8 @@ function Signup() {
             placeholder="Enter your address"
             rows="5"
             cols="25"
-            value={form.address}
+            ref={addressRef}
             name="address"
-            onChange={handleEvent}
           ></textarea>
         </div>
 

@@ -1,22 +1,21 @@
 import "../styles/Loginstyle.css";
-import React from "react";
-import { useState } from "react";
+import { useRef  } from "react";
 import { Link } from 'react-router-dom';
 
 function Loginpage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    setEmail('');
-    setPassword('');
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
   };
 
   function storeData() {
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
+    localStorage.setItem("email", emailRef.current.value);
+    localStorage.setItem("password", passwordRef.current.value);
   }
 
 
@@ -29,9 +28,8 @@ function Loginpage() {
           <input
             type="email"
             placeholder="Email"
-            value={email}
+            ref={emailRef}
             required
-            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -40,9 +38,8 @@ function Loginpage() {
           <input
             type="password"
             placeholder="Password"
-            value={password}
+            ref={passwordRef}
             required
-            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
