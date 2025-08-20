@@ -41,7 +41,7 @@ function Signup() {
     DOB: "",
     mobile: "",
     gender: "",
-    address: "",
+    address: "", 
   });
   alert("Data saved successfully")
   };
