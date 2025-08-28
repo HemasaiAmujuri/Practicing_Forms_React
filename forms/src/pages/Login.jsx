@@ -8,18 +8,14 @@ function Loginpage() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
     emailRef.current.value = "";
     passwordRef.current.value = "";
   };
 
-  function storeData() { 
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
-    alert("Login successfully")
   function storeData() {
     localStorage.setItem("email", emailRef.current.value);
     localStorage.setItem("password", passwordRef.current.value);
+    alert("Login successfully")
   }
 
 

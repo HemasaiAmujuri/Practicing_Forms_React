@@ -1,25 +1,23 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Signupstyle.css";
 
 function Signup() {
+  const [gender, setGender] = useState('')
   const nameRef = useRef();
   const emailRef = useRef();
   const dobRef = useRef();
   const mobileRef = useRef();
-  const genderRef = useRef();
   const addressRef = useRef();
 
 
   const handleEvent = (e) => {
-    e.preventDefault()
     nameRef.current.value = "";
     emailRef.current.value = "";
     dobRef.current.value = "";
     mobileRef.current.value="";
-    genderRef.current.value = "";
     addressRef.current.value = "";
-
+    setGender("")
   };
 
   function storeData() {
@@ -27,13 +25,14 @@ function Signup() {
     localStorage.setItem("email", emailRef.current.value);
     localStorage.setItem("DOB", dobRef.current.value);
     localStorage.setItem("mobile", mobileRef.current.value);
-    localStorage.setItem("gender", genderRef.current.value);
+    localStorage.setItem("gender", gender);
     localStorage.setItem("address", addressRef.current.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     storeData();
+    handleEvent();
   };
 
   return (
@@ -66,10 +65,10 @@ function Signup() {
         <div className="info">
           <label> DOB </label>
           <input
-            type="Date"
+            type="date"
             ref={dobRef}
             name="DOB"
-            placeholder="Enter your name"
+            placeholder="Enter your DOB"
             required
           />
         </div>
@@ -80,20 +79,20 @@ function Signup() {
             type="number"
             ref={mobileRef}
             name="mobile"
-            placeholder="Enter your name"
+            placeholder="Enter your mobile"
             required
           />
         </div>
 
         <div className="gender">
           <legend> Gender </legend>
-          <input type="radio" name="gender" value="male"  checked={genderRef.current.value == "male"} />
+          <input type="radio" name="gender" value="male"  checked={gender == "male"} onChange={(e) => setGender(e.target.value)}/>
           <label>Male</label>
 
-          <input type="radio" name="gender" value="female" checked={genderRef.current.value == "female"} />
+          <input type="radio" name="gender" value="female" checked={gender == "female"} onChange={(e) => setGender(e.target.value)} />
           <label>Female</label>
 
-          <input type="radio" name="gender" value="other" checked={genderRef.current.value == "other"} />
+          <input type="radio" name="gender" value="other" checked={gender == "other"} onChange={(e) => setGender(e.target.value)}/>
           <label>Other</label>
         </div>
 
