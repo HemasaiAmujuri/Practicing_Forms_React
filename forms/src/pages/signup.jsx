@@ -1,122 +1,131 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import "../styles/Signupstyle.css";
-
-function Signup() {
-  const [gender, setGender] = useState('')
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const dobRef = useRef();
-  const mobileRef = useRef();
-  const addressRef = useRef();
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { Link } from "react-router-dom"
+import "../styles/Signupstyle.css"
 
 
-  const handleEvent = (e) => {
-    nameRef.current.value = "";
-    emailRef.current.value = "";
-    dobRef.current.value = "";
-    mobileRef.current.value="";
-    addressRef.current.value = "";
-    setGender("")
+function signUp(){
+    const { register, handleSubmit, formState : { errors , issubmitting }, reset }  = useForm();
+
+     const onSubmit = (data) => {
+    Object.entries(data).forEach(([key, value]) => {
+      localStorage.setItem(key, value);
+    });
+
+    alert("Data saved successfully");
+    reset(); 
   };
 
-  function storeData() {
-    localStorage.setItem("name", nameRef.current.value);
-    localStorage.setItem("email", emailRef.current.value);
-    localStorage.setItem("DOB", dobRef.current.value);
-    localStorage.setItem("mobile", mobileRef.current.value);
-    localStorage.setItem("gender", gender);
-    localStorage.setItem("address", addressRef.current.value);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    storeData();
-    handleEvent();
-  };
-
-  return (
+  return(
     <div className="signUp">
-      <form onSubmit={handleSubmit}>
-        <div className="info">
-          <h1> SIGN UP </h1>
-          <label> Name </label>
+    <form onSubmit = {handleSubmit(onSubmit)}> 
+         <h1>SIGN UP</h1>
+
+          <div className="info">
+          <label>Name</label>
           <input
             type="text"
-            ref={nameRef}
-            name="name"
             placeholder="Enter your name"
-            required
-
+            {...register("name", { required: "Name is required" })}
           />
+          {errors.name && <p className="error">{errors.name.message}</p>}
         </div>
 
         <div className="info">
-          <label> Email </label>
+          <label>Email</label>
           <input
             type="email"
-            ref={emailRef}
-            name="email"
             placeholder="Enter your email"
-            required
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: "Invalid email address",
+              },
+            })}
           />
+          {errors.email && <p className="error">{errors.email.message}</p>}
         </div>
 
         <div className="info">
-          <label> DOB </label>
+          <label>Date of Birth</label>
           <input
             type="date"
-            ref={dobRef}
-            name="DOB"
-            placeholder="Enter your DOB"
-            required
+            {...register("DOB", { required: "Date of birth is required" })}
           />
+          {errors.DOB && <p className="error">{errors.DOB.message}</p>}
         </div>
 
+
         <div className="info">
-          <label> Mobile </label>
+          <label>Mobile</label>
           <input
-            type="number"
-            ref={mobileRef}
-            name="mobile"
-            placeholder="Enter your mobile"
-            required
+            type="tel"
+            placeholder="Enter your mobile number"
+            {...register("mobile", {
+              required: "Mobile number is required",
+              pattern: {
+                value: /^[0-9]{10}$/,
+                message: "Enter a valid 10-digit mobile number",
+              },
+            })}
           />
+          {errors.mobile && <p className="error">{errors.mobile.message}</p>}
         </div>
 
         <div className="gender">
-          <legend> Gender </legend>
-          <input type="radio" name="gender" value="male"  checked={gender == "male"} onChange={(e) => setGender(e.target.value)}/>
-          <label>Male</label>
-
-          <input type="radio" name="gender" value="female" checked={gender == "female"} onChange={(e) => setGender(e.target.value)} />
-          <label>Female</label>
-
-          <input type="radio" name="gender" value="other" checked={gender == "other"} onChange={(e) => setGender(e.target.value)}/>
-          <label>Other</label>
+          <legend>Gender</legend>
+          <label>
+            <input
+              type="radio"
+              value="male"
+              {...register("gender", { required: "Gender is required" })}
+            />
+            Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="female"
+              {...register("gender", { required: "Gender is required" })}
+            />
+            Female
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="other"
+              {...register("gender", { required: "Gender is required" })}
+            />
+            Other
+          </label>
+          {errors.gender && <p className="error">{errors.gender.message}</p>}
         </div>
 
-        <div className="info">
-          <label> Address </label>
+         <div className="info">
+          <label>Address</label>
           <textarea
             placeholder="Enter your address"
-            rows="5"
+            rows="4"
             cols="25"
-            ref={addressRef}
-            name="address"
+            {...register("address", { required: "Address is required" })}
           ></textarea>
+          {errors.address && <p className="error">{errors.address.message}</p>}
         </div>
 
-        <div className="button">
-          <input type="submit"></input>
+         <div className="button">
+          <button type="submit">Sign Up</button>
         </div>
 
         <h6>
           Already have an account? <Link to="/login">LogIn</Link>
         </h6>
-      </form>
+
+        
+    </form>
+
     </div>
-  );
+  )
 }
 
-export default Signup;
+export default signUp;
